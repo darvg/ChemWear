@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:padding="15dp">
+    android:padding="15dp"
+    android:background="@color/white">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -12,26 +13,21 @@
         android:padding="5dp"
         app:layout_box="all">
 
-        <TextView
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="Chem Helper for Wear"
-            android:textColor="@color/black" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Element List"
-            android:id="@+id/button_list"
-            android:layout_gravity="center" />
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Search"
             android:id="@+id/button_search"
             android:layout_gravity="center_horizontal|bottom" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Chem Helper Wear"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal|top"
+            android:textColor="@color/black" />
 
 
     </FrameLayout>

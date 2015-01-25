@@ -28,23 +28,14 @@ public class MainActivity extends Activity {
         processArrayList(elements);
 
         Button searchButton = (Button) findViewById(R.id.button_search);
-        Button listButton = (Button) findViewById(R.id.button_list);
+
 
         searchButton.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+
                 displaySpeechRecognizer();
-            }
-        });
-
-        listButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                displayList();
             }
         });
 
@@ -56,7 +47,14 @@ public class MainActivity extends Activity {
 
     public void processText(){
 
-        x = getElementBySymbol(spokenText);
+        if(isInteger(spokenText)) {
+            x = getElementByNumber(Integer.parseInt(spokenText));
+
+        } else if(spokenText.length() == 2 || spokenText.length() == 1){
+            x = getElementBySymbol(spokenText);
+        } else {
+            x = getElementByName(spokenText);
+        }
 
         if(x == null){
             System.out.println("Failed");
@@ -68,14 +66,13 @@ public class MainActivity extends Activity {
 
     }
 
+
     public void showInfoView(){
         Intent intent = new Intent(MainActivity.this, InfoActivity.class);
         intent.putExtra("EXTRA_ELEMENT", x);
         startActivity(intent);
 
     }
-
-    public void displayList(){}
     // Create an intent that can start the Speech Recognizer activity
 
     private void displaySpeechRecognizer() {
@@ -97,6 +94,7 @@ public class MainActivity extends Activity {
                 spokenText = results.get(0);
                 // Do something with spokenText
                 processText();
+
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -108,7 +106,7 @@ public class MainActivity extends Activity {
             scn = new Scanner(getResources().openRawResource(R.raw.periodictable));
 
             while(scn.hasNext()) {
-                list.add(new Element(scn.nextInt(), scn.next(), scn.next(), "Pseudo-Info"));
+                list.add(new Element(scn.nextInt(), scn.next(), scn.next(), scn.next().replaceAll("\\\\n", "\\\n") + "\n(number after letter should be treated as exponent."));
             }
 
             scn.close();
@@ -125,7 +123,7 @@ public class MainActivity extends Activity {
 
     }
 
-    /*public Element getElementByNumber(int atomicNumber)
+    public Element getElementByNumber(int atomicNumber)
     {
         for(int i = 0; i < elements.size(); i++){
             if(elements.get(i).getAtomicNumber() == (atomicNumber)){
@@ -133,7 +131,7 @@ public class MainActivity extends Activity {
             }
         }
         return null;
-    }*/
+    }
 
     public Element getElementBySymbol(String symbol)
     {
@@ -146,5 +144,28 @@ public class MainActivity extends Activity {
         return null;
 
 
+    }
+
+    public Element getElementByName(String name)
+    {
+        for(int i = 0; i < elements.size(); i++){
+            if(elements.get(i).getName().equalsIgnoreCase(name)){
+                return elements.get(i);
+            }
+        }
+
+        return null;
+
+
+    }
+
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
+        }
+        // only got here if we didn't return false
+        return true;
     }
 }
