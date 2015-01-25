@@ -12,30 +12,29 @@
         android:padding="5dp"
         app:layout_box="all">
 
-        <TextView
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="Chem Helper for Wear"
-            android:textColor="@color/black" />
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Element List"
-            android:id="@+id/button_list"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/numberView"
+            android:layout_gravity="center_horizontal|top" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/nameSyblView"
             android:layout_gravity="center" />
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search"
-            android:id="@+id/button_search"
-            android:layout_gravity="center_horizontal|bottom" />
-
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/infoView"
+            android:layout_gravity="center_horizontal|bottom"
+            android:maxLines = "20"
+            android:scrollbars = "vertical"/>
 
     </FrameLayout>
 </android.support.wearable.view.BoxInsetLayout>
-
-
-
